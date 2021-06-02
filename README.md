@@ -1,10 +1,10 @@
-# JuVader
+# VaderSentiment
 
 [![Build Status](https://travis-ci.org/nusretipek/JuliaVader.svg?branch=master)](https://travis-ci.org/nusretipek/JuliaVader)
 [![Check Status](https://img.shields.io/github/checks-status/nusretipek/JuliaVader/master)](https://img.shields.io/github/checks-status/nusretipek/JuliaVader/master)
 [![Lang Status](https://img.shields.io/github/languages/top/nusretipek/JuliaVader?color=blueviolet)](https://img.shields.io/github/languages/top/nusretipek/JuliaVader?color=blueviolet)
 
-Valence Aware Dictionary and sEntiment Reasoner **(VADER)** is a lexicon and rule-based sentiment analysis tool with a focus on the social media domain. **JuVader is a port of the VADER that originally implemented in Python.** 
+Valence Aware Dictionary and sEntiment Reasoner **(VADER)** is a lexicon and rule-based sentiment analysis tool with a focus on the social media domain. **VaderSentiment is a port of the VADER that originally implemented in Python.** 
 
 [Original Author's Code](https://github.com/cjhutto/vaderSentiment)
 
@@ -15,18 +15,19 @@ Valence Aware Dictionary and sEntiment Reasoner **(VADER)** is a lexicon and rul
 
 ```
 using Pkg
-Pkg.add(url="https://github.com/nusretipek/JuVader")
+Pkg.add(url="https://github.com/nusretipek/VaderSentiment")
 ```
 
 ## Basic Usage
 
 ### Code
 ```
-using JuVader
-analyzer = JuVader.SentimentIntensityAnalyzer
+using VaderSentiment
+analyzer = VaderSentiment.SentimentIntensityAnalyzer
 println(analyzer("VADER is smart, handsome, and funny.").polarity_scores)
 println(analyzer("Catch utf-8 emoji such as such as 💘 and 💋 and 😁").polarity_scores)
 ```
+
 ### Output
 ```
 Dict("neg"=> 0.0, "neu"=> 0.615, "pos"=> 0.385, "compound"=> 0.875)
