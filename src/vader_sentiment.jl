@@ -103,8 +103,8 @@ mutable struct SentimentIntensityAnalyzer
         return emoji_dict
     end
     
-    lexicon_dictionary = lex_dict(joinpath(dirname(pathof(JuliaVader)), "lexicons", "vader_lexicon.txt"))
-    emoji_dictionary = emoji_dict(joinpath(dirname(pathof(JuliaVader)), "lexicons", "emoji_utf8_lexicon.txt"))
+    lexicon_dictionary = lex_dict(joinpath(dirname(pathof(VaderSentiment)), "lexicons", "vader_lexicon.txt"))
+    emoji_dictionary = emoji_dict(joinpath(dirname(pathof(VaderSentiment)), "lexicons", "emoji_utf8_lexicon.txt"))
     
     function is_negated(input_words::Array, include_nt::Bool = true)
         input_words = [lowercase(string(i)) for i in input_words]
