@@ -4,11 +4,8 @@
 [![Check Status](https://img.shields.io/github/checks-status/nusretipek/JuliaVader/master)](https://img.shields.io/github/checks-status/nusretipek/JuliaVader/master)
 [![Lang Status](https://img.shields.io/github/languages/top/nusretipek/JuliaVader?color=blueviolet)](https://img.shields.io/github/languages/top/nusretipek/JuliaVader?color=blueviolet)
 
-JuliaVader is a port of the Valence Aware Dictionary and sEntiment Reasoner **(VADER)** that originally implemented in Python.
+Valence Aware Dictionary and sEntiment Reasoner **(VADER)** is a lexicon and rule-based sentiment analysis tool with a focus on the social media domain. **JuliaVader is a port of the VADER that originally implemented in Python.** [Original Author's Code](https://github.com/cjhutto/vaderSentiment)
 
-[Original Author's Code](https://github.com/cjhutto/vaderSentiment). 
-
-VADER is a lexicon and rule-based sentiment analysis tool with a focus on the social media domain.
 
 ## Installation 
 
@@ -59,7 +56,6 @@ TestTuple("Not GREATLY bad at all??", Dict("neg"=> 0.0, "neu"=> 0.502, "pos"=> 0
 TestTuple("Not GREATLY bad at all????", Dict("neg"=> 0.0, "neu"=> 0.467, "pos"=> 0.533, "compound"=> 0.6777)),
 TestTuple("Not least GREATLY bad at all????", Dict("neg"=> 0.0, "neu"=> 0.523, "pos"=> 0.477, "compound"=> 0.6777)),
 TestTuple("Not GREATLY least bad at all????", Dict("neg"=> 0.436, "neu"=> 0.564, "pos"=> 0.0, "compound"=> -0.5944)),
-TestTuple("Catch utf-8 emoji such as such as💘 and 💋 and 😁", Dict("neg"=> 0.0, "neu"=> 0.615, "pos"=> 0.385, "compound"=> 0.875)),
 TestTuple("least bad at all????", Dict("neg"=> 0.0, "neu"=> 0.441, "pos"=> 0.559, "compound"=> 0.5873)),
 TestTuple("No not GREATLY least bad at all????", Dict("neg"=> 0.548, "neu"=> 0.452, "pos"=> 0.0, "compound"=> -0.7238)),
 TestTuple("The book was only kind of no good.", Dict("neg"=> 0.381, "neu"=> 0.619, "pos"=> 0.0, "compound"=> -0.4017)),
