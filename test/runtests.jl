@@ -1,4 +1,4 @@
-using Test
+using Test, JuliaVader
 
 struct TestTuple
     sentence::AbstractString
@@ -36,7 +36,7 @@ test_set =  [TestTuple("VADER is smart, handsome, and funny.", Dict("neg"=> 0.0,
              TestTuple("The book was only kind of badn't ass good.", Dict("neg"=> 0.196, "neu"=> 0.571, "pos"=> 0.233, "compound"=> 0.1139)),
              TestTuple("I am a big happy cat.", Dict("neg"=> 0.0, "neu"=> 0.575, "pos"=> 0.425, "compound"=> 0.5719))]
 
-analyzer = SentimentIntensityAnalyzer
+analyzer = JuliaVader.SentimentIntensityAnalyzer
 
 @testset "Test Vader Sentiment" begin
     for test_case in test_set
