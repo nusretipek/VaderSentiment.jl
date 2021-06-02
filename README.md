@@ -15,7 +15,7 @@ Valence Aware Dictionary and sEntiment Reasoner **(VADER)** is a lexicon and rul
 
 ```
 using Pkg
-Pkg.add(url="https://github.com/nusretipek/VaderSentiment")
+Pkg.add(url="https://github.com/nusretipek/VaderSentiment.jl")
 ```
 
 ## Basic Usage
