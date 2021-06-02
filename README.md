@@ -5,6 +5,7 @@
 [![Lang Status](https://img.shields.io/github/languages/top/nusretipek/JuliaVader?color=blueviolet)](https://img.shields.io/github/languages/top/nusretipek/JuliaVader?color=blueviolet)
 
 JuliaVader is a port of the Valence Aware Dictionary and sEntiment Reasoner **(VADER)** that originally implemented in Python.
+
 [Original Author's Code](https://github.com/cjhutto/vaderSentiment). 
 
 VADER is a lexicon and rule-based sentiment analysis tool with a focus on the social media domain.
