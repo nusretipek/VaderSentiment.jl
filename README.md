@@ -1,8 +1,8 @@
 # VaderSentiment
 
-[![Build Status](https://travis-ci.org/nusretipek/JuliaVader.svg?branch=master)](https://travis-ci.org/nusretipek/JuliaVader)
-[![Check Status](https://img.shields.io/github/checks-status/nusretipek/JuliaVader/master)](https://img.shields.io/github/checks-status/nusretipek/JuliaVader/master)
-[![Lang Status](https://img.shields.io/github/languages/top/nusretipek/JuliaVader?color=blueviolet)](https://img.shields.io/github/languages/top/nusretipek/JuliaVader?color=blueviolet)
+[![Build Status](https://travis-ci.com/nusretipek/VaderSentiment.svg?branch=master)](https://travis-ci.com/nusretipek/VaderSentiment)
+[![Check Status](https://img.shields.io/github/checks-status/nusretipek/VaderSentiment/master)](https://img.shields.io/github/checks-status/nusretipek/VaderSentiment/master)
+[![Lang Status](https://img.shields.io/github/languages/top/nusretipek/VaderSentiment?color=blueviolet)](https://img.shields.io/github/languages/top/nusretipek/VaderSentiment?color=blueviolet)
 
 Valence Aware Dictionary and sEntiment Reasoner **(VADER)** is a lexicon and rule-based sentiment analysis tool with a focus on the social media domain. **VaderSentiment is a port of the VADER that originally implemented in Python.** 
 
