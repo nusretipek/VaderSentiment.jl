@@ -3,15 +3,14 @@ language: julia
 
 os:
   - linux
+  - windows
 
 julia:
-  - 1.5
-  - nightly
-
+  - 1.6
+  
 matrix:
   allow_failures:
   - julia: nightly
   
 notifications:
   email: false
-  
