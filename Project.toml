@@ -1,5 +1,5 @@
-name = "JuliaVader"
-uuid = "1f5a7cf9-4f30-4c0c-8bed-40b86233c9ed"
+name = "JuVader"
+uuid = "695fe2be-a315-4dd7-a0f6-16a26fb18dbc"
 authors = ["nusretipek <nusretipek@yandex.com>"]
 version = "0.1.0"
 
