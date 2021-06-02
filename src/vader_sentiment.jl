@@ -419,5 +419,3 @@ mutable struct SentimentIntensityAnalyzer
         new(polarity_scores(text))
     end
 end
-
-
