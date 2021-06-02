@@ -4,7 +4,9 @@
 [![Check Status](https://img.shields.io/github/checks-status/nusretipek/JuliaVader/master)](https://img.shields.io/github/checks-status/nusretipek/JuliaVader/master)
 [![Lang Status](https://img.shields.io/github/languages/top/nusretipek/JuliaVader?color=blueviolet)](https://img.shields.io/github/languages/top/nusretipek/JuliaVader?color=blueviolet)
 
-Valence Aware Dictionary and sEntiment Reasoner **(VADER)** is a lexicon and rule-based sentiment analysis tool with a focus on the social media domain. **JuliaVader is a port of the VADER that originally implemented in Python.** [Original Author's Code](https://github.com/cjhutto/vaderSentiment)
+Valence Aware Dictionary and sEntiment Reasoner **(VADER)** is a lexicon and rule-based sentiment analysis tool with a focus on the social media domain. **JuliaVader is a port of the VADER that originally implemented in Python.** 
+
+[Original Author's Code](https://github.com/cjhutto/vaderSentiment)
 
 
 ## Installation 
