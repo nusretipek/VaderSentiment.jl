@@ -15,4 +15,4 @@ notifications:
   email: false
 
 after_success:
- - julia -e 'using Pkg; import VaderSentiment; cd(Pkg.dir("VaderSentiment")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
+- julia -e 'using Pkg; cd(Pkg.dir("VaderSentiment")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
