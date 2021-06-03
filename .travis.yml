@@ -3,7 +3,6 @@ language: julia
 
 os:
   - linux
-  - windows
 
 julia:
   - 1.6
@@ -14,3 +13,6 @@ matrix:
   
 notifications:
   email: false
+  
+after_success:
+ - julia -e 'using Pkg; cd(Pkg.dir("MyPkg")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
