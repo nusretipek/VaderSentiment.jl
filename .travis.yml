@@ -19,4 +19,4 @@ script:
   - julia --code-coverage test/runtests.jl
   
 after_success:
-  - julia -e 'cd(Pkg.dir("VaderSentiment")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(Coveralls.process_folder())'
+- julia -e 'using Pkg; cd(Pkg.dir("VaderSentiment")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
