@@ -1,6 +1,6 @@
 # VaderSentiment
 
-[![Build Status](https://travis-ci.com/nusretipek/VaderSentiment.svg?branch=master)](https://travis-ci.com/nusretipek/VaderSentiment)
+[![Build Status](https://travis-ci.com/nusretipek/VaderSentiment.jl.svg?branch=master)](https://travis-ci.com/nusretipek/VaderSentiment.jl)
 [![codecov](https://codecov.io/gh/nusretipek/VaderSentiment.jl/branch/master/graph/badge.svg?token=X9RDYDGQLR)](https://codecov.io/gh/nusretipek/VaderSentiment.jl)
 [![Lang Status](https://img.shields.io/github/languages/top/nusretipek/VaderSentiment?color=blueviolet)](https://img.shields.io/github/languages/top/nusretipek/VaderSentiment?color=blueviolet)
 
