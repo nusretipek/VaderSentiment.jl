@@ -11,11 +11,9 @@ Valence Aware Dictionary and sEntiment Reasoner **(VADER)** is a lexicon and rul
 
 ## Installation 
 
-*Package is awaiting to be officially registered*
-
 ```
 using Pkg
-Pkg.add(url="https://github.com/nusretipek/VaderSentiment.jl")
+Pkg.add("VaderSentiment")
 ```
 
 ## Basic Usage
@@ -34,9 +32,11 @@ Dict("neg"=> 0.0, "neu"=> 0.615, "pos"=> 0.385, "compound"=> 0.875)
 Dict("neg"=> 0.0, "neu"=> 0.254, "pos"=> 0.746, "compound"=> 0.8316)
 ```
 
-## Tests & Quality
+## Tests & Speed
 
-Test sentences under runtests.jl checks with the original package outputs.
+Test sentences under runtests.jl checks with the original package outputs. 
+The analysis is app. 15-20% faster compared to the original package.  
+
 ```
 TestTuple("VADER is smart, handsome, and funny.", Dict("neg"=> 0.0, "neu"=> 0.254, "pos"=> 0.746, "compound"=> 0.8316)),
 TestTuple("VADER is smart, handsome, and funny!", Dict("neg"=> 0.0, "neu"=> 0.248, "pos"=> 0.752, "compound"=> 0.8439)),
@@ -75,3 +75,4 @@ TestTuple("I am a big happy cat.", Dict("neg"=> 0.0, "neu"=> 0.575, "pos"=> 0.42
 <hr>
 
 Release v0.1.0 - Initial release
+Release v0.1.1 - Minor optimization of hash table lookups
