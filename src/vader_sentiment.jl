@@ -42,40 +42,38 @@ SPECIAL_CASES = Dict("the shit"=> 3, "the bomb"=> 3, "bad ass"=> 1.5, "badass"=>
 
 struct SentiText
     text;words_and_emoticons;is_cap_diff
+    
     function _strip_punc_if_word(token)
-        stripped_temp = replace(token, r"[[:punct:]]+$" => "")
-        stripped = replace(stripped_temp, r"^[[:punct:]]+" => "")
+        stripped = replace(token, r"^[[:punct:]]+|[[:punct:]]+$" => "")
         if (length(stripped) <= 2)
             return token
         else
             return stripped
         end
     end
-    function _words_and_emoticons(text)
-        words = split(text, r"\s+")
-        stripped = map(_strip_punc_if_word, words)
-        return stripped
-    end
-    function SentiText(text)
-        if (typeof(text) != String)
-            text = string(text)
-        end
-        temp_words_and_emoticons = _words_and_emoticons(text)
-        new(text, temp_words_and_emoticons, allcap_differential(temp_words_and_emoticons))
-    end
+    
     function allcap_differential(words::Array)
         allcap_words = 0
         for word in words
-            if ((length(replace(word, r"[^A-Za-z]" => "")) > 0) && all(isuppercase, collect(replace(word, r"[^A-Za-z]" => ""))))
+            replaced_word = replace(word, r"[^A-Za-z]" => "")
+            if ((length(replaced_word) > 0) && (all(isuppercase, collect(replaced_word))))
                 allcap_words += 1
             end
         end
         cap_differential = size(words)[1] - allcap_words
-        if (0 < cap_differential && cap_differential < size(words)[1])
+        if (cap_differential < size(words)[1] && 0 < cap_differential)
             return true
         else
             return false
         end
+    end
+
+    function SentiText(text)
+        if (typeof(text) != String)
+            text = string(text)
+        end
+        temp_words_and_emoticons = map(_strip_punc_if_word, split(text, r"\s+"))
+        new(text, temp_words_and_emoticons, allcap_differential(temp_words_and_emoticons))
     end
 end
 
@@ -135,12 +133,13 @@ mutable struct SentimentIntensityAnalyzer
     function allcap_differential(words::Array)
         allcap_words = 0
         for word in words
-            if ((length(replace(word, r"[^A-Za-z]" => "")) > 0) && all(isuppercase, collect(replace(word, r"[^A-Za-z]" => ""))))
+            replaced_word = replace(word, r"[^A-Za-z]" => "")
+            if ((length(replaced_word) > 0) && (all(isuppercase, collect(replaced_word))))
                 allcap_words += 1
             end
         end
         cap_differential = size(words)[1] - allcap_words
-        if (0 < cap_differential && cap_differential < size(words)[1])
+        if (cap_differential < size(words)[1] && 0 < cap_differential)
             return true
         else
             return false
@@ -150,12 +149,13 @@ mutable struct SentimentIntensityAnalyzer
     function scalar_inc_dec(word::AbstractString, valence::Real, has_mixed_caps::Bool)
         scalar = 0.0
         word_lower = lowercase(word)
-        if (word_lower in collect(keys(BOOSTER_DICT)))
+        if haskey(BOOSTER_DICT, word_lower)
             scalar = BOOSTER_DICT[word_lower]
             if (valence < 0)
                 scalar *= -1
             end
-            if ((length(replace(word, r"[^A-Za-z]" => "")) > 0) && all(isuppercase, collect(replace(word, r"[^A-Za-z]" => ""))) && has_mixed_caps)
+            replaced_word = replace(word, r"[^A-Za-z]" => "")
+            if (has_mixed_caps && (length(replaced_word) > 0) && all(isuppercase, collect(replaced_word)))
                 if (valence > 0)
                     scalar += C_INCR
                 else
@@ -165,17 +165,18 @@ mutable struct SentimentIntensityAnalyzer
         end
         return scalar
     end
+    
     #Calculate Polarity Scores
     function _least_check(valence::Real, words_and_emoticons::Array, i::Integer)
-        if (i > 2 && !(lowercase(words_and_emoticons[i - 1]) in collect(keys(lexicon_dictionary))) && lowercase(words_and_emoticons[i - 1]) == "least")
+        if (i > 2 && !(haskey(lexicon_dictionary, lowercase(words_and_emoticons[i - 1]))) && lowercase(words_and_emoticons[i - 1]) == "least")
             if (lowercase(words_and_emoticons[i - 2]) != "at" && lowercase(words_and_emoticons[i - 2]) != "very")
                 valence = valence * N_SCALAR
             end
-        elseif (i > 1 && !(lowercase(words_and_emoticons[i - 1]) in collect(keys(lexicon_dictionary))) && lowercase(words_and_emoticons[i - 1]) == "least")
+        elseif (i > 1 && !(haskey(lexicon_dictionary, lowercase(words_and_emoticons[i - 1]))) && lowercase(words_and_emoticons[i - 1]) == "least")
             valence = valence * N_SCALAR
         end
         return valence
-    end
+    end 
 
     function _but_check(words_and_emoticons::Array, sentiments::Array)
         words_and_emoticons_lower = [lowercase(string(s)) for s in words_and_emoticons]
@@ -193,7 +194,7 @@ mutable struct SentimentIntensityAnalyzer
             end
         end
         return sentiments
-    end
+        end
 
     function _special_idioms_check(valence::Real, words_and_emoticons::Array, i::Integer)
         words_and_emoticons_lower = [lowercase(string(s)) for s in words_and_emoticons]
@@ -204,31 +205,31 @@ mutable struct SentimentIntensityAnalyzer
         threetwo = words_and_emoticons_lower[i-3] * " " * words_and_emoticons_lower[i-2]
         sequences = [onezero, twoonezero, twoone, threetwoone, threetwo]
         for sequence in sequences
-            if sequence in collect(keys(SPECIAL_CASES))
+            if haskey(SPECIAL_CASES, sequence)
                 valence = SPECIAL_CASES[sequence]
                 break
             end
         end
         if (size(words_and_emoticons_lower)[1]-1 > i)
             zeroone = words_and_emoticons_lower[i] * " " * words_and_emoticons_lower[i+1]
-            if zeroone in collect(keys(SPECIAL_CASES))
+            if haskey(SPECIAL_CASES, zeroone)
                 valence = SPECIAL_CASES[zeroone]
             end
         end
         if (size(words_and_emoticons_lower)[1]-1 > i+1)
             zeroonetwo = words_and_emoticons_lower[i] * " " * words_and_emoticons_lower[i+1] * " " * words_and_emoticons_lower[i+2]
-            if zeroonetwo in collect(keys(SPECIAL_CASES))
+            if haskey(SPECIAL_CASES, zeroonetwo)
                 valence = SPECIAL_CASES[zeroonetwo]
             end
         end
         n_grams = [threetwoone, threetwo, twoone]
         for n_gram in n_grams
-            if n_gram in collect(keys(BOOSTER_DICT))
+            if haskey(BOOSTER_DICT, n_gram) 
                 valence += BOOSTER_DICT[n_gram]
             end
         end
         return valence
-    end
+        end
 
     function _amplify_ep(text::AbstractString)
         c = count(x->(x=='!'), text)
@@ -336,16 +337,17 @@ mutable struct SentimentIntensityAnalyzer
         is_cap_diff = sentitext.is_cap_diff
         words_and_emoticons = sentitext.words_and_emoticons
         item_lowercase = lowercase(item)
-        if (item_lowercase in collect(keys(lexicon_dictionary)))
+        if haskey(lexicon_dictionary, item_lowercase)
             valence = lexicon_dictionary[item_lowercase]
-            if (item_lowercase == "no" && i != size(words_and_emoticons)[1] && lowercase(words_and_emoticons[i+1]) in collect(keys(lexicon_dictionary)))
+            if (item_lowercase == "no" && i != size(words_and_emoticons)[1] && haskey(lexicon_dictionary, lowercase(words_and_emoticons[i+1])))
                 valence = 0.0
             end
             if ((i > 1 && lowercase(words_and_emoticons[i - 1]) == "no") || (i > 2 && lowercase(words_and_emoticons[i - 2]) == "no") || (i > 3 && lowercase(words_and_emoticons[i - 3]) == "no" && lowercase(words_and_emoticons[i - 1]) in ["or", "nor"]))
                 valence = lexicon_dictionary[item_lowercase] * N_SCALAR
             end
-
-            if ((length(replace(item, r"[^A-Za-z]" => "")) > 0) && all(isuppercase, collect(replace(item, r"[^A-Za-z]" => ""))) && is_cap_diff)
+            
+            replaced_item = replace(item, r"[^A-Za-z]" => "")
+            if (is_cap_diff && (length(replaced_item) > 0) && all(isuppercase, collect(replaced_item)))
                 if (valence > 0)
                     valence += C_INCR
                 else
@@ -354,7 +356,7 @@ mutable struct SentimentIntensityAnalyzer
             end
 
             for start_i in 1:3
-                if (i > start_i && !(lowercase(words_and_emoticons[i - (start_i)]) in collect(keys(lexicon_dictionary))))
+                if (i > start_i && !(haskey(lexicon_dictionary, lowercase(words_and_emoticons[i - (start_i)]))))
                     s = scalar_inc_dec(words_and_emoticons[i - (start_i)], valence, is_cap_diff)
                     if (start_i == 2 && s != 0)
                         s *= 0.95
@@ -380,7 +382,7 @@ mutable struct SentimentIntensityAnalyzer
         text_no_emoji = ""
         prev_space = true
         for chr in split(text, "")
-            if chr in collect(keys(emoji_dictionary))
+            if haskey(emoji_dictionary, chr) 
                 description = emoji_dictionary[chr]
                 if (!prev_space)
                     text_no_emoji *= " "
@@ -399,7 +401,7 @@ mutable struct SentimentIntensityAnalyzer
         words_and_emoticons = sentitext.words_and_emoticons
         for (i, item) in enumerate(words_and_emoticons)
             valence = 0
-            if lowercase(item) in collect(keys(BOOSTER_DICT))
+            if haskey(BOOSTER_DICT, lowercase(item))
                 push!(sentiments, valence)
                 continue
             end           
