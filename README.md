@@ -34,7 +34,7 @@ Dict("neg"=> 0.0, "neu"=> 0.254, "pos"=> 0.746, "compound"=> 0.8316)
 
 ## Tests & Speed
 
-Test sentences under runtests.jl checks with the original package outputs. 
+Test sentences under runtests.jl checks with the original package outputs. <br>
 The analysis is app. 15-20% faster compared to the original package.  
 
 ```
