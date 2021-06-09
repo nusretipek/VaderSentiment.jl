@@ -28,8 +28,8 @@ println(analyzer("Catch utf-8 emoji such as such as 💘 and 💋 and 😁").pol
 
 ### Output
 ```
-Dict("neg"=> 0.0, "neu"=> 0.615, "pos"=> 0.385, "compound"=> 0.875)
 Dict("neg"=> 0.0, "neu"=> 0.254, "pos"=> 0.746, "compound"=> 0.8316)
+Dict("neg"=> 0.0, "neu"=> 0.615, "pos"=> 0.385, "compound"=> 0.875)
 ```
 
 ## Tests & Speed
