@@ -75,4 +75,4 @@ TestTuple("I am a big happy cat.", Dict("neg"=> 0.0, "neu"=> 0.575, "pos"=> 0.42
 <hr>
 
 Release v0.1.0 - Initial release <br>
-Release v0.1.1 - Minor optimization of hash table lookups
+Release v0.1.1 - Minor optimization of hash table lookups 
